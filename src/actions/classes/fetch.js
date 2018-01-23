@@ -5,7 +5,6 @@ import {
   LOAD_ERROR,
   LOAD_SUCCESS
 } from '../loading'
-// import { GAME_PLAYERS_UPDATED } from './subscribe'
 
 export const FETCHED_CLASSES = 'FETCHED_CLASSES'
 export const FETCHED_ONE_CLASS = 'FETCHED_ONE_CLASS'
@@ -36,32 +35,32 @@ export default () => {
   }
 }
 
-export const fetchStudents = (class) => {
-  return dispatch => {
-    dispatch({ type: APP_LOADING })
-
-    api.get(`/classes/${class._id}/students`)
-      .then((result) => {
-        dispatch({ type: APP_DONE_LOADING })
-        dispatch({ type: LOAD_SUCCESS })
-
-        dispatch({
-          type: CLASS_STUDENTS_UPDATED,
-          payload: {
-            class,
-            students: result.body
-          }
-        })
-      })
-      .catch((error) => {
-        dispatch({ type: APP_DONE_LOADING })
-        dispatch({
-          type: LOAD_ERROR,
-          payload: error.message
-        })
-      })
-  }
-}
+// export const fetchStudents = (aClass) => {
+//   return dispatch => {
+//     dispatch({ type: APP_LOADING })
+//
+//     api.get(`/classes/${aClass._id}/students`)
+//       .then((result) => {
+//         dispatch({ type: APP_DONE_LOADING })
+//         dispatch({ type: LOAD_SUCCESS })
+//
+//         dispatch({
+//           type: CLASS_STUDENTS_UPDATED,
+//           payload: {
+//             aClass,
+//             students: result.body
+//           }
+//         })
+//       })
+//       .catch((error) => {
+//         dispatch({ type: APP_DONE_LOADING })
+//         dispatch({
+//           type: LOAD_ERROR,
+//           payload: error.message
+//         })
+//       })
+//   }
+// }
 
 export const fetchOneGame = (classId) => {
   return dispatch => {
