@@ -62,7 +62,7 @@ export default () => {
 //   }
 // }
 
-export const fetchOneGame = (classId) => {
+export const fetchOneClass = (classId) => {
   return dispatch => {
     dispatch({ type: APP_LOADING })
 
