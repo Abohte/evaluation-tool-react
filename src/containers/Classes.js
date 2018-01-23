@@ -22,50 +22,13 @@ class Lobby extends PureComponent {
 
   goToGame = gameId => event => this.props.push(`/play/${gameId}`)
 
-  isJoinable(game) {
-    return game.players.length < 2 &&
-      !this.isPlayer(game)
-  }
-
-  isPlayer(game) {
-    if (!this.props.currentUser) { return false }
-    return game.players.map(p => p.userId)
-      .indexOf(this.props.currentUser._id) >= 0
-  }
-
-  isPlayable(game) {
-    return this.isPlayer(game) && game.players.length === 2
-  }
-
-  renderGame = (game, index) => {
-    let ActionIcon = this.isJoinable(game) ? JoinGameIcon : WatchGameIcon
-    if (this.isPlayer(game)) ActionIcon = this.isPlayable(game) ? PlayGameIcon : WaitingIcon
-
-    if (!game.players[0].name) { this.props.fetchPlayers(game) }
-
-    const title = game.players.map(p => (p.name || null))
-      .filter(n => !!n)
-      .join(' vs ')
-
-    return (
-      <MenuItem
-        key={index}
-        onClick={this.goToGame(game._id)}
-        rightIcon={<ActionIcon />}
-        primaryText={title} />
-    )
-  }
 
   render() {
     return (
       <div className="Classes">
         <h1>All classes</h1>
         <CreateClassButton />
-        <Paper className="paper">
-          <Menu>
-            {this.props.games.map(this.renderGame)}
-          </Menu>
-        </Paper>
+        
       </div>
     )
   }
