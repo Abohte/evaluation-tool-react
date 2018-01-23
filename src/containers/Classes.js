@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import fetchGames, { fetchPlayers } from '../actions/games/fetch'
 import { connect as subscribeToWebsocket } from '../actions/websocket'
-import CreateGameButton from '../components/games/CreateGameButton'
+import CreateClassButton from '../components/games/CreateClassButton'
 import Paper from 'material-ui/Paper'
 import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
@@ -12,7 +12,7 @@ import WatchGameIcon from 'material-ui/svg-icons/image/remove-red-eye'
 import JoinGameIcon from 'material-ui/svg-icons/social/person-add'
 import PlayGameIcon from 'material-ui/svg-icons/hardware/videogame-asset'
 import WaitingIcon from 'material-ui/svg-icons/image/timelapse'
-import './Lobby.css'
+import './Classes.css'
 
 class Lobby extends PureComponent {
   componentWillMount() {
@@ -58,9 +58,9 @@ class Lobby extends PureComponent {
 
   render() {
     return (
-      <div className="Lobby">
-        <h1>Lobby!</h1>
-        <CreateGameButton />
+      <div className="Classes">
+        <h1>All classes</h1>
+        <CreateClassButton />
         <Paper className="paper">
           <Menu>
             {this.props.games.map(this.renderGame)}

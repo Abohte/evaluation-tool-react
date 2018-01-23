@@ -1,10 +1,10 @@
-import Lobby from './Lobby'
+import Classes from './Classes'
 import Game from './Game'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 
 export {
-  Lobby,
+  Classes,
   Game,
   SignIn,
   SignUp,
