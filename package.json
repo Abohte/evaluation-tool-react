@@ -1,5 +1,5 @@
 {
-  "name": "game-lobby",
+  "name": "evaluation-tool",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,7 +13,6 @@
     "react-scripts": "1.0.17",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "socket.io-client": "^2.0.4",
     "superagent": "^3.8.0"
   },
   "scripts": {
