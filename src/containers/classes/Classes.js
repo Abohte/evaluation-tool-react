@@ -33,9 +33,9 @@ class Classes extends PureComponent {
         <main>
           {this.props.classes.map(this.renderClassItem)}
         </main>
-
-        <CreateClassButton />
-
+        <footer>
+          <CreateClassButton />
+        </footer>
       </div>
     )
   }

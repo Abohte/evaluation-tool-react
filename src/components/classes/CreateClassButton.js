@@ -2,13 +2,13 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
-import StarIcon from 'material-ui/svg-icons/action/favorite'
 import Dialog from 'material-ui/Dialog';
 import DatePicker from 'material-ui/DatePicker';
 import createClass from '../../actions/classes/create'
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 class CreateClassButton extends PureComponent {
   static propTypes = {
@@ -80,11 +80,10 @@ class CreateClassButton extends PureComponent {
     return (
       <div>
         <div className="CreateClassButton">
-          <RaisedButton
-            label="Create Class"
-            primary={true}
-            onClick={this.handleClickOpen}
-            icon={<StarIcon />} />
+        <FloatingActionButton
+          onClick={this.handleClickOpen} >
+          <ContentAdd />
+        </FloatingActionButton>
         </div>
         <Dialog
           title="Create class"
