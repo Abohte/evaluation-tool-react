@@ -6,12 +6,15 @@ import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 import Dialog from 'material-ui/Dialog';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import createStudent from '../../actions/students/create'
+import ContentEdit from 'material-ui/svg-icons/content/create';
+import editStudent from '../../actions/students/edit'
 
-class CreateStudentButton extends PureComponent {
+class EditStudentButton extends PureComponent {
   static propTypes = {
-    classId: PropTypes.string.isRequired
+    _id: PropTypes.string.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    photo: PropTypes.string.isRequired,
   }
 
   state = {
@@ -40,11 +43,13 @@ class CreateStudentButton extends PureComponent {
       firstName: this.refs.firstName.getValue(),
       lastName: this.refs.lastName.getValue(),
     }
-    this.props.createStudent(student, this.props.classId)
+    this.props.editStudent(student, this.props._id)
     this.handleClose()
   }
 
   render() {
+    const { _id, firstName, lastName, photo } = this.props
+
     const actions = [
       <FlatButton
         label="Cancel"
@@ -62,9 +67,9 @@ class CreateStudentButton extends PureComponent {
     return (
       <div>
         <div className="CreateStudentButton">
-        <FloatingActionButton
+        <FloatingActionButton mini={true}
           onClick={this.handleClickOpen} >
-          <ContentAdd />
+          <ContentEdit />
         </FloatingActionButton>
         </div>
         <Dialog
@@ -75,13 +80,13 @@ class CreateStudentButton extends PureComponent {
         >
           <form>
             <div className="input">
-              <TextField ref="firstName" type="text" hintText="First Name" />
+              <TextField ref="firstName" type="text" hintText="First Name" defaultValue={firstName} />
             </div>
             <div className="input">
-              <TextField ref="lastName" type="text" hintText="Last Name" />
+              <TextField ref="lastName" type="text" hintText="Last Name" defaultValue={lastName}/>
             </div>
             <div className="input">
-              <TextField ref="photo" type="url" hintText="Photo URL" />
+              <TextField ref="photo" type="url" hintText="Photo URL" defaultValue={photo} />
             </div>
           </form>
         </Dialog>
@@ -90,8 +95,4 @@ class CreateStudentButton extends PureComponent {
   }
 }
 
-const mapDispatchToProps = {
-  createStudent
-}
-
-export default connect(null, mapDispatchToProps)(CreateStudentButton)
+export default connect(null, { editStudent })(EditStudentButton)

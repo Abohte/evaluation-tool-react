@@ -2,6 +2,7 @@ import { FETCHED_CLASSES, FETCHED_ONE_CLASS } from '../actions/classes/fetch'
 import { CLASS_CREATED } from '../actions/classes/create'
 import { STUDENT_CREATED } from '../actions/students/create'
 import { STUDENT_REMOVED } from '../actions/students/delete'
+import { STUDENT_UPDATED } from '../actions/students/edit'
 
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
@@ -36,6 +37,7 @@ export default (state = [], { type, payload } = {}) => {
         }
       })
 
+      case STUDENT_UPDATED :
       case STUDENT_REMOVED :
         const modifiedClass = { ...payload }
         return state.map((aClass) => {

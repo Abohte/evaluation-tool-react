@@ -5,14 +5,11 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { Link } from 'react-router-dom'
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import Dialog from 'material-ui/Dialog';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentEdit from 'material-ui/svg-icons/content/create';
-import ContentClear from 'material-ui/svg-icons/content/clear';
 import FlatButton from 'material-ui/FlatButton';
 import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
-import removeStudent from '../../actions/students/delete'
+import EditStudentButton from '../../components/classes/EditStudentButton'
+import DeleteStudentButton from '../../components/classes/DeleteStudentButton'
 import './Classes.css'
 
 class ClassItem extends PureComponent {
@@ -23,10 +20,6 @@ class ClassItem extends PureComponent {
     evaluations: PropTypes.array.isRequired,
     classId: PropTypes.string.isRequired
   }
-
-  state = {
-    open: false,
-  };
 
   renderEvaluation = (evaluation, index) => {
     const date = new Date(evaluation.date)
@@ -53,38 +46,8 @@ class ClassItem extends PureComponent {
     return {borderBottom: `4px solid ${evaluations[0].evaluation}`}
   }
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({
-      open: false,
-    });
-  };
-
-  submitDelete(event) {
-    event.preventDefault()
-    this.props.removeStudent(this.props._id, this.props.classId)
-    this.handleClose()
-  }
-
   render() {
     const { _id, firstName, lastName, photo, evaluations } = this.props
-
-    const actions = [
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        onClick={this.handleClose}
-      />,
-      <FlatButton
-        label="Submit"
-        primary={true}
-        disabled={false}
-        onClick={this.submitDelete.bind(this)}
-      />,
-    ];
 
     return (
 
@@ -105,20 +68,8 @@ class ClassItem extends PureComponent {
         </CardText>
         <CardActions>
         <div className="edit-buttons">
-          <FloatingActionButton mini={true} >
-            <ContentEdit />
-          </FloatingActionButton>
-
-          <FloatingActionButton mini={true} onClick={this.handleClickOpen}>
-            <ContentClear />
-          </FloatingActionButton>
-          <Dialog
-            title="Remove student"
-            actions={actions}
-            modal={true}
-            open={this.state.open}
-          >
-          </Dialog>
+          <EditStudentButton { ...this.props }/>
+          <DeleteStudentButton studentId={_id}/>
         </div>
         </CardActions>
       </Card>
@@ -127,4 +78,4 @@ class ClassItem extends PureComponent {
   }
 }
 
-export default connect(null, { removeStudent, push })(ClassItem)
+export default connect(null, { push })(ClassItem)
