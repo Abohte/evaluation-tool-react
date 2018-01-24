@@ -39,7 +39,6 @@ export default (state = [], { type, payload } = {}) => {
       case STUDENT_REMOVED :
         const modifiedClass = { ...payload }
         return state.map((aClass) => {
-          console.log(aClass._id === modifiedClass._id)
           return aClass._id === modifiedClass._id ? modifiedClass : aClass
         })
 
