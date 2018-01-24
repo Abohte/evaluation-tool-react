@@ -14,3 +14,16 @@ footer {
   text-align: center;
   margin-top: 10px;
 }
+
+.edit-buttons {
+  text-align: right;
+}
+
+.chip {
+  margin: 4px;
+}
+
+.wrapper {
+  display: flex;
+  flexWrap: wrap;
+}

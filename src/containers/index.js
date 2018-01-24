@@ -1,11 +1,11 @@
 import SignIn from './auth/SignIn'
 import SignUp from './auth/SignUp'
-import Classes from './classes/Classes'
-import ViewClass from './classes/ViewClass'
+import ClassOverview from './classes/ClassOverview'
+import ClassPage from './classes/ClassPage'
 
 export {
   SignIn,
   SignUp,
-  Classes,
-  ViewClass
+  ClassOverview,
+  ClassPage
 }

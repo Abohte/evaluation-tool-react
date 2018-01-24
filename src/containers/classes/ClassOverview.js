@@ -10,7 +10,7 @@ import ClassItem from './ClassItem'
 // import MenuItem from 'material-ui/MenuItem'
 import './Classes.css'
 
-class Classes extends PureComponent {
+class ClassOverview extends PureComponent {
 
   //TODO: Check if fetchClasses works
   //TODO: Display the classes fetched and add a link to ViewClass for each
@@ -26,7 +26,6 @@ class Classes extends PureComponent {
   goToClass = classId => event => this.props.push(`/classes/${classId}`)
 
   render() {
-    console.log(this.props)
     return (
       <div className="Classes">
         <h1>All classes</h1>
@@ -43,4 +42,4 @@ class Classes extends PureComponent {
 
 const mapStateToProps = ({ classes }) => ({ classes })
 
-export default connect(mapStateToProps, { fetchClasses, push })(Classes)
+export default connect(mapStateToProps, { fetchClasses, push })(ClassOverview)
