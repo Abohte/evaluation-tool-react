@@ -40,13 +40,15 @@ class ClassItem extends PureComponent {
 
   render() {
     const { batchNumber, startsAt, endsAt, students } = this.props
+    const startDate = new Date(startsAt)
+    const endDate = new Date(endsAt)
 
     return (
 
       <Card>
         <CardHeader
           title={`Batch ${batchNumber}`}
-          subtitle={`${startsAt}-${endsAt} • ${students.length} students`}
+          subtitle={`${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()} • ${students.length} students`}
           actAsExpander={true}
           showExpandableButton={true}
         />
@@ -61,9 +63,6 @@ class ClassItem extends PureComponent {
         </CardActions>
       </Card>
     )
-
-
-
 
   }
 }

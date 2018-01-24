@@ -7,7 +7,6 @@ import {
   SignUp,
   Classes,
   ViewClass,
-  CreateClass
 } from './containers'
 
 export default class Routes extends Component {
@@ -22,7 +21,6 @@ export default class Routes extends Component {
         <Route path="/sign-in" component={SignIn} />
         <Route path="/sign-up" component={SignUp} />
         <Route path="/classes" component={Classes} />
-        <Route path="/classes/create" component={CreateClass} />
         <Route path="/classes/view" component={ViewClass} />
       </div>
     )

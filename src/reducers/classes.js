@@ -1,4 +1,5 @@
 import { FETCHED_CLASSES, FETCHED_ONE_CLASS } from '../actions/classes/fetch'
+import { CLASS_CREATED } from '../actions/classes/create'
 
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
@@ -17,7 +18,7 @@ export default (state = [], { type, payload } = {}) => {
         return aClass
       })
 
-    case 'CLASS_CREATED' :
+    case CLASS_CREATED :
       const newClass = { ...payload }
       return [newClass].concat(state)
 
