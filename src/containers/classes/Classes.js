@@ -2,24 +2,38 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import fetchClasses from '../actions/classes/fetch'
-import CreateClassButton from '../components/classes/CreateClassButton'
+import fetchClasses from '../../actions/classes/fetch'
+import CreateClassButton from '../../components/classes/CreateClassButton'
+import ClassItem from './ClassItem'
 // import Paper from 'material-ui/Paper'
 // import Menu from 'material-ui/Menu'
 // import MenuItem from 'material-ui/MenuItem'
 import './Classes.css'
 
 class Classes extends PureComponent {
+
+  //TODO: Check if fetchClasses works
+  //TODO: Display the classes fetched and add a link to ViewClass for each
+
   componentWillMount() {
     this.props.fetchClasses()
+  }
+
+  renderClassItem = (aClass, index) => {
+    return <ClassItem key={index} {...aClass}/>
   }
 
   goToClass = classId => event => this.props.push(`/classes/${classId}`)
 
   render() {
+    console.log(this.props)
     return (
       <div className="Classes">
         <h1>All classes</h1>
+        <main>
+          {this.props.classes.map(this.renderClassItem)}
+        </main>
+
         <CreateClassButton />
 
       </div>
@@ -27,6 +41,6 @@ class Classes extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ classes, currentUser }) => ({ classes, currentUser })
+const mapStateToProps = ({ classes }) => ({ classes })
 
 export default connect(mapStateToProps, { fetchClasses, push })(Classes)

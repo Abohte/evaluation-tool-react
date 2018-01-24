@@ -1,9 +1,13 @@
-import Classes from './Classes'
-import SignIn from './SignIn'
-import SignUp from './SignUp'
+import SignIn from './auth/SignIn'
+import SignUp from './auth/SignUp'
+import Classes from './classes/Classes'
+import CreateClass from './classes/CreateClass'
+import ViewClass from './classes/ViewClass'
 
 export {
-  Classes,
   SignIn,
   SignUp,
+  Classes,
+  CreateClass,
+  ViewClass
 }
