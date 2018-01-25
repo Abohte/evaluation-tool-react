@@ -24,7 +24,7 @@ class EvaluationBar extends PureComponent {
     const yellowPercentage = this.evaluationPercentage(evaluations, "yellow")
     const greenPercentage = this.evaluationPercentage(evaluations, "green")
     const restPercentage = this.evaluationPercentage(evaluations, null)
-
+    console.log(evaluations.length)
     if (evaluations.length === 0) return (
       <div className="evaluation-bar">
         <div className="evaluation" style={{width: "100%"}} >
@@ -35,16 +35,16 @@ class EvaluationBar extends PureComponent {
 
     return (
       <div className="evaluation-bar">
-        <div className="evaluation" style={{width: `${redPercentage}`, backgroundColor: `${colors("red")}`}} >
+        <div className="evaluation" style={{width: `${redPercentage}`, backgroundColor: `${colors("red")}`, display:(redPercentage ? null : "none")}}>
           {redPercentage}
         </div>
-        <div className="evaluation" style={{width: `${yellowPercentage}`, backgroundColor: `${colors("yellow")}`}}>
+        <div className="evaluation" style={{width: `${yellowPercentage}`, backgroundColor: `${colors("yellow")}`, display:(yellowPercentage ? null : "none")}}>
           {yellowPercentage}
         </div>
-        <div className="evaluation" style={{width: `${greenPercentage}`, backgroundColor: `${colors("green")}`}}>
+        <div className="evaluation" style={{width: `${greenPercentage}`, backgroundColor: `${colors("green")}`, display:(greenPercentage ? null : "none")}}>
           {greenPercentage}
         </div>
-        <div className="evaluation" style={{width: `${restPercentage}`, backgroundColor: `${colors(null)}`}}>
+        <div className="evaluation" style={{width: `${restPercentage}`, backgroundColor: `${colors(null)}`, display:(restPercentage ? null : "none")}}>
           {restPercentage}
         </div>
       </div>
