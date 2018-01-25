@@ -4,11 +4,10 @@ import { connect } from 'react-redux'
 import { fetchOneClass } from '../../actions/classes/fetch'
 import StudentItem from './StudentItem'
 import CreateStudentButton from '../../components/classes/CreateStudentButton'
+import EvaluationBar from '../../components/classes/EvaluationBar'
 import './Classes.css'
 
 class ClassPage extends PureComponent {
-
-  //TODO: Fetch information for a class and display
 
   componentWillMount() {
     this.props.fetchOneClass(this.props.match.params.classId)
@@ -18,13 +17,28 @@ class ClassPage extends PureComponent {
     return <StudentItem classId={this.props._id} key={index} {...student}/>
   }
 
+  studentEvaluations = (students) => {
+    return students.map(this.getLastEvaluationColor)
+  }
+
+  getLastEvaluationColor = (student) => {
+    if (student.evaluations.length === 0) return null
+    return student.evaluations[0].evaluation
+  }
+
+
   render() {
-    const { _id, batchNumber } = this.props
+    const { _id, batchNumber, students } = this.props
     if (!_id) return null
+
+    console.log(this.studentEvaluations(students))
 
     return (
       <div className="Classes">
-        <h1>Batch {batchNumber}</h1>
+        <header>
+          <h1>Batch {batchNumber}</h1>
+          <EvaluationBar evaluations={this.studentEvaluations(students)} />
+        </header>
         <main>
           {this.props.students.map(this.renderStudentItem)}
         </main>
