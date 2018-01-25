@@ -6,8 +6,8 @@ import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
-import signIn from '../actions/user/sign-in'
-import Title from '../components/UI/Title'
+import signIn from '../../actions/user/sign-in'
+import Title from '../../components/UI/Title'
 
 const dialogStyle = {
   width: '400px',
@@ -29,7 +29,7 @@ export class SignIn extends PureComponent {
 
   componentWillMount() {
     const { replace, signedIn } = this.props
-    if (signedIn) replace('/')
+    if (signedIn) replace('/classes')
   }
 
   submitForm(event) {

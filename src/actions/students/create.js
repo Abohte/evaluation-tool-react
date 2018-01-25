@@ -8,15 +8,15 @@ import {
 
 const api = new API()
 
-export const CLASS_CREATED = 'CLASS_CREATED'
+export const STUDENT_CREATED = 'STUDENT_CREATED'
 
-export default (aClass) => {
+export default (student, classId) => {
   return (dispatch) => {
     dispatch({ type: APP_LOADING })
 
-    api.post('/classes', aClass)
+    api.post(`/class/${classId}/students`, student)
       .then((res) => {
-        dispatch({ type: CLASS_CREATED, payload: res.body })
+        dispatch({ type: STUDENT_CREATED, payload: { student: res.body, classId: classId }})
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
       })

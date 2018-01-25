@@ -6,20 +6,17 @@ import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 import Dialog from 'material-ui/Dialog';
 import DatePicker from 'material-ui/DatePicker';
-import createClass from '../../actions/classes/create'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import createStudent from '../../actions/students/create'
 
-class CreateClassButton extends PureComponent {
+class CreateStudentButton extends PureComponent {
   static propTypes = {
-    signedIn: PropTypes.bool,
+    classId: PropTypes.string.isRequired
   }
 
   state = {
     open: false,
-    startDate: undefined,
-    endDate: undefined,
-
   };
 
   handleClickOpen = () => {
@@ -29,8 +26,6 @@ class CreateClassButton extends PureComponent {
   handleClose = () => {
     this.setState({
       open: false,
-      startDate: null,
-      endDate: null,
     });
   };
 
@@ -39,26 +34,14 @@ class CreateClassButton extends PureComponent {
   //   return !(this.state.startDate !== null && this.state.endDate !== null && this.refs.batchNumber.value !== null)
   // }
 
-  handleChangeStartDate = (event, date) => {
-    this.setState({
-      startDate: date,
-    });
-  };
-
-  handleChangeEndDate = (event, date) => {
-    this.setState({
-      endDate: date,
-    });
-  };
-
   submitForm(event) {
     event.preventDefault()
-    const aClass = {
-      batchNumber: this.refs.batchNumber.getValue(),
-      startsAt: this.state.startDate,
-      endsAt: this.state.endDate,
+    const student = {
+      photo: this.refs.photo.getValue(),
+      firstName: this.refs.firstName.getValue(),
+      lastName: this.refs.lastName.getValue(),
     }
-    this.props.createClass(aClass)
+    this.props.createStudent(student, this.props.classId)
     this.handleClose()
   }
 
@@ -79,35 +62,27 @@ class CreateClassButton extends PureComponent {
 
     return (
       <div>
-        <div className="CreateClassButton">
+        <div className="CreateStudentButton">
         <FloatingActionButton
           onClick={this.handleClickOpen} >
           <ContentAdd />
         </FloatingActionButton>
         </div>
         <Dialog
-          title="Create class"
+          title="Add student"
           actions={actions}
           modal={true}
           open={this.state.open}
         >
           <form>
             <div className="input">
-              <TextField ref="batchNumber" type="number" hintText="Batch Number" />
+              <TextField ref="firstName" type="text" hintText="First Name" />
             </div>
             <div className="input">
-              <DatePicker
-                onChange={this.handleChangeStartDate}
-                autoOk={true}
-                floatingLabelText="Start Date"
-                defaultDate={this.state.startDate}
-              />
-              <DatePicker
-                onChange={this.handleChangeEndDate}
-                autoOk={true}
-                floatingLabelText="End Date"
-                defaultDate={this.state.endDate}
-              />
+              <TextField ref="lastName" type="text" hintText="Last Name" />
+            </div>
+            <div className="input">
+              <TextField ref="photo" type="url" hintText="Photo URL" />
             </div>
           </form>
         </Dialog>
@@ -117,7 +92,7 @@ class CreateClassButton extends PureComponent {
 }
 
 const mapDispatchToProps = {
-  createClass
+  createStudent
 }
 
-export default connect(null, mapDispatchToProps)(CreateClassButton)
+export default connect(null, mapDispatchToProps)(CreateStudentButton)

@@ -66,7 +66,7 @@ export const fetchOneClass = (classId) => {
   return dispatch => {
     dispatch({ type: APP_LOADING })
 
-    api.get(`/classes/${classId}`)
+    api.get(`/class/${classId}`)
       .then((result) => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })

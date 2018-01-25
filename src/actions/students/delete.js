@@ -8,15 +8,14 @@ import {
 
 const api = new API()
 
-export const CLASS_CREATED = 'CLASS_CREATED'
+export const STUDENT_REMOVED = 'STUDENT_REMOVED'
 
-export default (aClass) => {
+export default (studentId, classId) => {
   return (dispatch) => {
     dispatch({ type: APP_LOADING })
-
-    api.post('/classes', aClass)
+    api.delete(`/class/${classId}/student/${studentId}`)
       .then((res) => {
-        dispatch({ type: CLASS_CREATED, payload: res.body })
+        dispatch({ type: STUDENT_REMOVED, payload: res.body })
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
       })
