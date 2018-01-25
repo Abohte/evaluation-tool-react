@@ -25,8 +25,6 @@ class EvaluationBar extends PureComponent {
     const greenPercentage = this.evaluationPercentage(evaluations, "green")
     const restPercentage = this.evaluationPercentage(evaluations, null)
 
-    console.log(yellowPercentage)
-
     return (
       <div className="evaluation-bar">
         <div className="evaluation red" style={{width: `${redPercentage}`}} >
