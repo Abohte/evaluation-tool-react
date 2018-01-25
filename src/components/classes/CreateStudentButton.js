@@ -52,7 +52,7 @@ class CreateStudentButton extends PureComponent {
         onClick={this.handleClose}
       />,
       <FlatButton
-        label="Submit"
+        label="Save"
         primary={true}
         disabled={false}
         onClick={this.submitForm.bind(this)}
@@ -75,13 +75,13 @@ class CreateStudentButton extends PureComponent {
         >
           <form>
             <div className="input">
-              <TextField ref="firstName" type="text" hintText="First Name" />
+              <TextField ref="firstName" type="text" hintText="First Name" fullWidth={true} />
             </div>
             <div className="input">
-              <TextField ref="lastName" type="text" hintText="Last Name" />
+              <TextField ref="lastName" type="text" hintText="Last Name" fullWidth={true} />
             </div>
             <div className="input">
-              <TextField ref="photo" type="url" hintText="Photo URL" />
+              <TextField ref="photo" type="url" hintText="Photo URL" fullWidth={true} />
             </div>
           </form>
         </Dialog>

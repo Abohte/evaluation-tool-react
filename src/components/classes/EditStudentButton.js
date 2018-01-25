@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
-import Dialog from 'material-ui/Dialog';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentEdit from 'material-ui/svg-icons/content/create';
+import Dialog from 'material-ui/Dialog'
+import FloatingActionButton from 'material-ui/FloatingActionButton'
+import ContentEdit from 'material-ui/svg-icons/content/create'
 import editStudent from '../../actions/students/edit'
 
 class EditStudentButton extends PureComponent {
@@ -19,17 +19,17 @@ class EditStudentButton extends PureComponent {
 
   state = {
     open: false,
-  };
+  }
 
   handleClickOpen = () => {
-    this.setState({ open: true });
-  };
+    this.setState({ open: true })
+  }
 
   handleClose = () => {
     this.setState({
       open: false,
-    });
-  };
+    })
+  }
 
   // checkValid = () => {
   //   console.log(this.refs.batchNumber.value )
@@ -48,7 +48,7 @@ class EditStudentButton extends PureComponent {
   }
 
   render() {
-    const { _id, firstName, lastName, photo } = this.props
+    const { firstName, lastName, photo } = this.props
 
     const actions = [
       <FlatButton
@@ -57,7 +57,7 @@ class EditStudentButton extends PureComponent {
         onClick={this.handleClose}
       />,
       <FlatButton
-        label="Submit"
+        label="Save"
         primary={true}
         disabled={false}
         onClick={this.submitForm.bind(this)}
@@ -73,20 +73,20 @@ class EditStudentButton extends PureComponent {
         </FloatingActionButton>
         </div>
         <Dialog
-          title="Add student"
+          title="Edit student"
           actions={actions}
           modal={true}
           open={this.state.open}
         >
           <form>
             <div className="input">
-              <TextField ref="firstName" type="text" hintText="First Name" defaultValue={firstName} />
+              <TextField ref="firstName" type="text" hintText="First Name" defaultValue={firstName} fullWidth={true}/>
             </div>
             <div className="input">
-              <TextField ref="lastName" type="text" hintText="Last Name" defaultValue={lastName}/>
+              <TextField ref="lastName" type="text" hintText="Last Name" defaultValue={lastName} fullWidth={true} />
             </div>
             <div className="input">
-              <TextField ref="photo" type="url" hintText="Photo URL" defaultValue={photo} />
+              <TextField ref="photo" type="url" hintText="Photo URL" defaultValue={photo} fullWidth={true} />
             </div>
           </form>
         </Dialog>

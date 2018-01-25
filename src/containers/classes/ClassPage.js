@@ -1,6 +1,7 @@
 // src/containers/classes/ViewClass.js
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import Snackbar from 'material-ui/Snackbar'
 import { fetchOneClass } from '../../actions/classes/fetch'
 import StudentItem from './StudentItem'
 import CreateStudentButton from '../../components/classes/CreateStudentButton'
@@ -9,13 +10,30 @@ import AskQuestionButton from '../../components/classes/AskQuestionButton'
 import './Classes.css'
 
 class ClassPage extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      toEvaluate: undefined
+    }
+  }
 
   componentWillMount() {
     this.props.fetchOneClass(this.props.match.params.classId)
   }
 
   renderStudentItem = (student, index) => {
-    return <StudentItem classId={this.props._id} key={index} {...student}/>
+    return <StudentItem
+      classId={this.props._id}
+      key={index}
+      addEvaluation={(index === this.state.toEvaluate)}
+      {...student}
+      onNext={() => this.onNext(index)}/>
+  }
+
+  onNext(index) {
+    if (index+1 >= this.props.students.length) this.setState({ open: true })
+    this.setState({toEvaluate: index+1})
   }
 
   lastEvaluations = (students) => {
@@ -31,9 +49,17 @@ class ClassPage extends PureComponent {
 
   getLastEvaluationColor = (student) => {
     if (student.evaluations.length === 0) return null
-    return student.evaluations[0].evaluation
+    const lastEvaluation = student.evaluations.reduce((evaluation, mostRecentEvaluation) => {
+      return new Date(evaluation.date) > new Date(mostRecentEvaluation.date) ? evaluation : mostRecentEvaluation
+    })
+    return lastEvaluation.evaluation
   }
 
+  handleRequestClose = () => {
+    this.setState({
+      open: false,
+    })
+  }
 
   render() {
     const { _id, batchNumber, students } = this.props
@@ -52,6 +78,11 @@ class ClassPage extends PureComponent {
         <footer>
           <CreateStudentButton classId={_id}/>
         </footer>
+        <Snackbar
+          open={this.state.open}
+          message="Last student evaluated"
+          autoHideDuration={4000}
+          onRequestClose={this.handleRequestClose} />
       </div>
     )
   }
