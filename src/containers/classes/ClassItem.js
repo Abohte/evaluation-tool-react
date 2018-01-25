@@ -7,6 +7,7 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
+import colors from '../../components/UI/Colors.js'
 import './Classes.css'
 
 class ClassItem extends PureComponent {
@@ -19,7 +20,7 @@ class ClassItem extends PureComponent {
 
   renderStudent = (student, index) => {
     const studentName = `${student.firstName} ${student.lastName}`
-    const color = student.evaluations.length > 0 ? student.evaluations[0].evaluation : "grey"
+    const color = colors(student.evaluations.length > 0 ? student.evaluations[0].evaluation : null)
     return (
         <div key={index} className="chip">
           <Chip>
