@@ -19,7 +19,6 @@ class CreateClassButton extends PureComponent {
     open: false,
     startDate: undefined,
     endDate: undefined,
-
   }
 
   handleClickOpen = () => {
@@ -31,13 +30,73 @@ class CreateClassButton extends PureComponent {
       open: false,
       startDate: undefined,
       endDate: undefined,
+      batchNumberError: undefined,
+      startDateError: undefined,
+      endDateError: undefined
     })
   }
 
-  // checkValid = () => {
-  //   console.log(this.refs.batchNumber.value )
-  //   return !(this.state.startDate !== null && this.state.endDate !== null && this.refs.batchNumber.value !== null)
-  // }
+  validateBatchNumber() {
+    const { batchNumber } = this.refs
+
+    if (batchNumber.getValue()) {
+      this.setState({
+        batchNumberError: null
+      })
+      return true
+    }
+
+    this.setState({
+      batchNumberError: "Please provide a batchNumber"
+    })
+    return false
+  }
+
+  validateStartDate() {
+    const { startDate } = this.state
+
+    if (startDate) {
+      this.setState({
+        startDateError: null
+      })
+      return true
+    }
+
+    this.setState({
+      startDateError: "Please provide a start date"
+    })
+    return false
+  }
+
+  validateEndDate() {
+    const { endDate, startDate } = this.state
+
+    if (!endDate) {
+      this.setState({
+        endDateError: "Please provide an end date"
+      })
+      return false
+    }
+
+    if (endDate <= startDate) {
+      this.setState({
+        endDateError: "Please provide a valid end date"
+      })
+      return false
+    }
+
+    this.setState({
+      endDateError: null
+    })
+    return true
+
+  }
+
+  validateAll() {
+    return this.validateBatchNumber() &&
+      this.validateStartDate() &&
+      this.validateEndDate()
+  }
 
   handleChangeStartDate = (event, date) => {
     this.setState({
@@ -53,13 +112,16 @@ class CreateClassButton extends PureComponent {
 
   submitForm(event) {
     event.preventDefault()
-    const aClass = {
-      batchNumber: this.refs.batchNumber.getValue(),
-      startsAt: this.state.startDate,
-      endsAt: this.state.endDate,
+    if (this.validateAll()) {
+      const aClass = {
+        batchNumber: this.refs.batchNumber.getValue(),
+        startsAt: this.state.startDate,
+        endsAt: this.state.endDate,
+      }
+      this.props.createClass(aClass)
+      this.handleClose()
     }
-    this.props.createClass(aClass)
-    this.handleClose()
+    return false
   }
 
   render() {
@@ -93,7 +155,9 @@ class CreateClassButton extends PureComponent {
         >
           <form>
             <div className="input">
-              <TextField ref="batchNumber" type="number" hintText="Batch Number" />
+              <TextField ref="batchNumber" type="number" hintText="Batch Number"
+              onChange={this.validateBatchNumber.bind(this)}
+              errorText={this.state.batchNumberError} />
             </div>
             <div className="input">
               <DatePicker
@@ -101,13 +165,13 @@ class CreateClassButton extends PureComponent {
                 autoOk={true}
                 floatingLabelText="Start Date"
                 defaultDate={this.state.startDate}
-              />
+                errorText={this.state.startDateError} />
               <DatePicker
                 onChange={this.handleChangeEndDate}
                 autoOk={true}
                 floatingLabelText="End Date"
                 defaultDate={this.state.endDate}
-              />
+                errorText={this.state.endDateError} />
             </div>
           </form>
         </Dialog>

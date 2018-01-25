@@ -30,7 +30,7 @@ class CreateEvaluationButton extends PureComponent {
     super(props)
     this.state = {
       open: props.startOpen || false,
-      date: undefined,
+      date: this.usedDate(new Date()) ? undefined : new Date(),
       evaluation: props.color || "green"
     }
   }
@@ -43,6 +43,7 @@ class CreateEvaluationButton extends PureComponent {
     this.setState({
       open: false,
       date: undefined,
+      dateError: undefined
     })
   }
 
@@ -58,16 +59,35 @@ class CreateEvaluationButton extends PureComponent {
     })
   }
 
+  validateDate() {
+    const { date } = this.state
+
+    if (date) {
+      this.setState({
+        dateError: null
+      })
+      return true
+    }
+
+    this.setState({
+      dateError: "Please provide a date"
+    })
+    return false
+  }
+
   submitForm(next, event) {
     event.preventDefault()
-    const evaluation = {
-      remarks: this.refs.remarks.getValue(),
-      date: this.state.date,
-      evaluation: this.state.evaluation,
+    if (this.validateDate()) {
+      const evaluation = {
+        remarks: this.refs.remarks.getValue(),
+        date: this.state.date,
+        evaluation: this.state.evaluation,
+      }
+      this.props.createEvaluation(evaluation, this.props.student._id)
+      this.handleClose()
+      if (next) this.props.onNext()
     }
-    this.props.createEvaluation(evaluation, this.props.student._id)
-    this.handleClose()
-    if (next) this.props.onNext()
+    return false
   }
 
   usedDate = (date) => {
@@ -80,7 +100,6 @@ class CreateEvaluationButton extends PureComponent {
 
   render() {
     const color = this.props.color
-    const today = new Date()
     const actions = [
       <FlatButton
         label="Cancel"
@@ -148,9 +167,9 @@ class CreateEvaluationButton extends PureComponent {
                 autoOk={true}
                 floatingLabelText="Evaluated Date"
                 shouldDisableDate={this.usedDate}
-                defaultDate={this.usedDate(today) ? undefined : today}
-                maxDate={today}
-              />
+                defaultDate={this.state.date}
+                maxDate={new Date()}
+                errorText={this.state.dateError} />
             </div>
             <div className="input">
               <TextField
