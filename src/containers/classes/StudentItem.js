@@ -10,6 +10,7 @@ import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
 import EditStudentButton from '../../components/classes/EditStudentButton'
 import DeleteStudentButton from '../../components/classes/DeleteStudentButton'
+import colors from '../../components/UI/Colors.js'
 import './Classes.css'
 
 class ClassItem extends PureComponent {
@@ -26,7 +27,7 @@ class ClassItem extends PureComponent {
     return (
         <div key={index} className="chip">
           <Chip>
-          <Avatar size={32} backgroundColor={evaluation.evaluation}/>
+          <Avatar size={32} backgroundColor={colors(evaluation.evaluation)}/>
             {date.toLocaleDateString()}
           </Chip>
         </div>
@@ -43,7 +44,8 @@ class ClassItem extends PureComponent {
 
   getLastEvaluationColor = (evaluations) => {
     if (evaluations.length === 0) return null
-    return {borderBottom: `4px solid ${evaluations[0].evaluation}`}
+    const color = colors(evaluations[0].evaluation)
+    return {borderBottom: `4px solid ${color}`}
   }
 
   render() {

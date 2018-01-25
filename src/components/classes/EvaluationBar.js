@@ -1,6 +1,6 @@
-// src/recipes/RecipeItem.js
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import colors from '../../components/UI/Colors.js'
 import '../../containers/classes/Classes.css'
 
 class EvaluationBar extends PureComponent {
@@ -36,16 +36,16 @@ class EvaluationBar extends PureComponent {
 
     return (
       <div className="evaluation-bar">
-        <div className="evaluation evaluation-red" style={{width: `${redPercentage}`}} >
+        <div className="evaluation" style={{width: `${redPercentage}`, backgroundColor: `${colors("red")}`}} >
           {redPercentage}
         </div>
-        <div className="evaluation evaluation-yellow" style={{width: `${yellowPercentage}`}}>
+        <div className="evaluation" style={{width: `${yellowPercentage}`, backgroundColor: `${colors("yellow")}`}}>
           {yellowPercentage}
         </div>
-        <div className="evaluation evaluation-green" style={{width: `${greenPercentage}`}}>
+        <div className="evaluation" style={{width: `${greenPercentage}`, backgroundColor: `${colors("green")}`}}>
           {greenPercentage}
         </div>
-        <div className="evaluation evaluation-missing" style={{width: `${restPercentage}`}}>
+        <div className="evaluation" style={{width: `${restPercentage}`, backgroundColor: `${colors(null)}`}}>
           {restPercentage}
         </div>
       </div>
