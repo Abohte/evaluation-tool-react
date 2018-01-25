@@ -61,7 +61,11 @@ class ClassItem extends PureComponent {
 
   render() {
     const { _id, firstName, lastName, photo } = this.props
-    const evaluations = this.props.evaluations.reverse()
+    const evaluations = this.props.evaluations.sort((a, b) => {
+      if (new Date(a.date) > new Date(b.date)) return -1
+      if (new Date(a.date) < new Date(b.date)) return 1
+      else return 0
+    })
     const evaluationDates = evaluations.map((evaluation) => new Date(evaluation.date))
 
     return (

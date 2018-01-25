@@ -49,7 +49,10 @@ class ClassPage extends PureComponent {
 
   getLastEvaluationColor = (student) => {
     if (student.evaluations.length === 0) return null
-    return student.evaluations[0].evaluation
+    const lastEvaluation = student.evaluations.reduce((evaluation, mostRecentEvaluation) => {
+      return new Date(evaluation.date) > new Date(mostRecentEvaluation.date) ? evaluation : mostRecentEvaluation
+    })
+    return lastEvaluation.evaluation
   }
 
   handleRequestClose = () => {
