@@ -5,6 +5,7 @@ import { fetchOneClass } from '../../actions/classes/fetch'
 import StudentItem from './StudentItem'
 import CreateStudentButton from '../../components/classes/CreateStudentButton'
 import EvaluationBar from '../../components/classes/EvaluationBar'
+import AskQuestionButton from '../../components/classes/AskQuestionButton'
 import './Classes.css'
 
 class ClassPage extends PureComponent {
@@ -17,8 +18,15 @@ class ClassPage extends PureComponent {
     return <StudentItem classId={this.props._id} key={index} {...student}/>
   }
 
-  studentEvaluations = (students) => {
+  lastEvaluations = (students) => {
     return students.map(this.getLastEvaluationColor)
+  }
+
+  studentsWithLastEvaluation = (students) => {
+    return students.map(student => ({
+      studentName: student.firstName + " " + student.lastName,
+      lastEvaluation: this.getLastEvaluationColor(student)
+    }))
   }
 
   getLastEvaluationColor = (student) => {
@@ -31,13 +39,12 @@ class ClassPage extends PureComponent {
     const { _id, batchNumber, students } = this.props
     if (!_id) return null
 
-    console.log(this.studentEvaluations(students))
-
     return (
       <div className="Classes">
         <header>
           <h1>Batch {batchNumber}</h1>
-          <EvaluationBar evaluations={this.studentEvaluations(students)} />
+          <EvaluationBar evaluations={this.lastEvaluations(students)} />
+          <AskQuestionButton students={this.studentsWithLastEvaluation(students)}/>
         </header>
         <main>
           {this.props.students.map(this.renderStudentItem)}

@@ -4,11 +4,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
-import Dialog from 'material-ui/Dialog';
-import DatePicker from 'material-ui/DatePicker';
+import Dialog from 'material-ui/Dialog'
+import DatePicker from 'material-ui/DatePicker'
 import createClass from '../../actions/classes/create'
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+import FloatingActionButton from 'material-ui/FloatingActionButton'
+import ContentAdd from 'material-ui/svg-icons/content/add'
 
 class CreateClassButton extends PureComponent {
   static propTypes = {
@@ -20,19 +20,19 @@ class CreateClassButton extends PureComponent {
     startDate: undefined,
     endDate: undefined,
 
-  };
+  }
 
   handleClickOpen = () => {
-    this.setState({ open: true });
-  };
+    this.setState({ open: true })
+  }
 
   handleClose = () => {
     this.setState({
       open: false,
       startDate: null,
       endDate: null,
-    });
-  };
+    })
+  }
 
   // checkValid = () => {
   //   console.log(this.refs.batchNumber.value )
@@ -42,14 +42,14 @@ class CreateClassButton extends PureComponent {
   handleChangeStartDate = (event, date) => {
     this.setState({
       startDate: date,
-    });
-  };
+    })
+  }
 
   handleChangeEndDate = (event, date) => {
     this.setState({
       endDate: date,
-    });
-  };
+    })
+  }
 
   submitForm(event) {
     event.preventDefault()
@@ -75,7 +75,7 @@ class CreateClassButton extends PureComponent {
         disabled={false}
         onClick={this.submitForm.bind(this)}
       />,
-    ];
+    ]
 
     return (
       <div>
