@@ -11,19 +11,10 @@ class AskQuestionButton extends PureComponent {
     open: false,
     studentName: undefined,
   }
+
   static propTypes = {
-    students: PropTypes.array.isRequired,
+    students: PropTypes.array.isRequired
   }
-  //
-  // evaluationsByColor = (evaluations, color) => {
-  //   return evaluations.filter(evaluation => evaluation === color)
-  // }
-  //
-  // evaluationPercentage = (evaluations, color) => {
-  //   const evaluationsNumber = this.evaluationsByColor(evaluations, color).length
-  //   const evaluationPercentage = (evaluationsNumber/evaluations.length)*100
-  //   return (evaluationPercentage === 0 ? null : `${evaluationPercentage}%`)
-  // }
 
   handleClickOpen = () => {
     this.setState({
@@ -35,8 +26,6 @@ class AskQuestionButton extends PureComponent {
   handleClose = () => {
     this.setState({
       open: false,
-      startDate: null,
-      endDate: null,
     })
   }
 
@@ -68,7 +57,6 @@ class AskQuestionButton extends PureComponent {
   }
 
   render() {
-    console.log(this.props.students)
     const actions = [
       <FlatButton
         label="Back"
@@ -83,6 +71,7 @@ class AskQuestionButton extends PureComponent {
           className="question-button"
           label="Ask question"
           onClick={this.handleClickOpen}
+          disabled={this.props.students.length === 0}
           secondary={true}/>
         <Dialog
           actions={actions}

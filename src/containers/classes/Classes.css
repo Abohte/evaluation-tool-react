@@ -41,7 +41,7 @@ footer {
 .evaluation-bar {
   height: 40px;
   width: 100%;
-  background-color: grey;
+  background-color: lightgrey;
   margin-bottom: 25px;
   display: flex;
   flex-direction: row;
