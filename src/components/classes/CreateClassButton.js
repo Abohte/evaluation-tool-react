@@ -11,6 +11,9 @@ import ContentAdd from 'material-ui/svg-icons/content/add'
 import createClass from '../../actions/classes/create'
 
 class CreateClassButton extends PureComponent {
+  static propTypes = {
+    createClass: PropTypes.func.isRequired
+  }
 
   state = {
     open: false,

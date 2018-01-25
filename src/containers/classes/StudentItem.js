@@ -1,12 +1,10 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import Avatar from 'material-ui/Avatar';
-import Chip from 'material-ui/Chip';
 import EditStudentButton from '../../components/classes/EditStudentButton'
 import DeleteStudentButton from '../../components/classes/DeleteStudentButton'
-import NewEvaluationButton from '../../components/classes/NewEvaluationButton'
+import CreateEvaluationButton from '../../components/classes/CreateEvaluationButton'
+import EditEvaluationChip from '../../components/classes/EditEvaluationChip'
 import colors from '../../components/UI/Colors.js'
 import './Classes.css'
 
@@ -19,15 +17,11 @@ class ClassItem extends PureComponent {
     classId: PropTypes.string.isRequired
   }
 
-  renderEvaluation = (evaluation, index) => {
-    const date = new Date(evaluation.date)
+  renderEvaluation = (evaluation, evaluationDates, index) => {
     return (
-        <div key={index} className="chip">
-          <Chip>
-          <Avatar size={32} backgroundColor={colors(evaluation.evaluation)}/>
-            {date.toLocaleDateString()}
-          </Chip>
-        </div>
+      <div key={index} className="chip">
+        <EditEvaluationChip evaluation={evaluation} evaluationDates={evaluationDates} />
+      </div>
     )
   }
 
@@ -64,12 +58,12 @@ class ClassItem extends PureComponent {
 
         <CardText expandable={true}>
           <div className="evaluation-buttons">
-            <NewEvaluationButton evaluationDates={evaluationDates} color="red" studentId={_id}/>
-            <NewEvaluationButton evaluationDates={evaluationDates} color="yellow" studentId={_id}/>
-            <NewEvaluationButton evaluationDates={evaluationDates} color="green" studentId={_id}/>
+            <CreateEvaluationButton evaluationDates={evaluationDates} color="red" studentId={_id}/>
+            <CreateEvaluationButton evaluationDates={evaluationDates} color="yellow" studentId={_id}/>
+            <CreateEvaluationButton evaluationDates={evaluationDates} color="green" studentId={_id}/>
           </div>
           <div className="wrapper">
-            {evaluations.map(this.renderEvaluation)}
+            {evaluations.map((evaluation, index) => this.renderEvaluation(evaluation, evaluationDates, index))}
           </div>
         </CardText>
         <CardActions>

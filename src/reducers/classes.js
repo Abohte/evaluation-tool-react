@@ -4,6 +4,7 @@ import { STUDENT_CREATED } from '../actions/students/create'
 import { STUDENT_REMOVED } from '../actions/students/delete'
 import { STUDENT_UPDATED } from '../actions/students/edit'
 import { EVALUATION_CREATED } from '../actions/evaluations/create'
+import { EVALUATION_UPDATED } from '../actions/evaluations/edit'
 
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
@@ -41,8 +42,8 @@ export default (state = [], { type, payload } = {}) => {
     case STUDENT_UPDATED :
     case STUDENT_REMOVED :
     case EVALUATION_CREATED :
+    case EVALUATION_UPDATED :
       const modifiedClass = { ...payload }
-      console.log(modifiedClass)
       return state.map((aClass) => {
         return aClass._id === modifiedClass._id ? modifiedClass : aClass
       })

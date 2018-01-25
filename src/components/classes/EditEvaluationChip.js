@@ -1,31 +1,34 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
-import FlatButton from 'material-ui/FlatButton';
+import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 import Dialog from 'material-ui/Dialog'
 import DatePicker from 'material-ui/DatePicker'
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton'
-import ActionSelected from 'material-ui/svg-icons/image/lens';
-import ActionUnselected from 'material-ui/svg-icons/image/panorama-fish-eye';
+import ActionSelected from 'material-ui/svg-icons/image/lens'
+import ActionUnselected from 'material-ui/svg-icons/image/panorama-fish-eye'
+import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
 import colors from '../../components/UI/Colors.js'
-import createEvaluation from '../../actions/evaluations/create'
-import '../../containers/classes/Classes.css'
+import editEvaluation from '../../actions/evaluations/edit'
 
-class NewEvaluationButton extends PureComponent {
+class EditEvaluationChip extends PureComponent {
   static propTypes = {
-    color: PropTypes.string,
-    studentId: PropTypes.string.isRequired
+    editEvaluation: PropTypes.func.isRequired,
+    evaluation: PropTypes.shape({
+      date: PropTypes.string.isRequired,
+      remarks: PropTypes.string,
+      evaluation: PropTypes.string.isRequired
+    }).isRequired
   }
 
   constructor(props) {
     super(props)
     this.state = {
       open: false,
-      date: undefined,
-      evaluation: props.color || "green"
+      date: new Date(props.evaluation.date),
+      evaluation: props.evaluation.evaluation
     }
   }
 
@@ -36,13 +39,6 @@ class NewEvaluationButton extends PureComponent {
   handleClose = () => {
     this.setState({
       open: false,
-      date: undefined,
-    })
-  }
-
-  handleChangeDate = (event, date) => {
-    this.setState({
-      date: date,
     })
   }
 
@@ -59,7 +55,7 @@ class NewEvaluationButton extends PureComponent {
       date: this.state.date,
       evaluation: this.state.evaluation,
     }
-    this.props.createEvaluation(evaluation, this.props.studentId)
+    this.props.editEvaluation(evaluation, this.props.evaluation._id)
     this.handleClose()
   }
 
@@ -72,7 +68,9 @@ class NewEvaluationButton extends PureComponent {
   }
 
   render() {
-    const color = this.props.color
+    const { evaluation } = this.props
+    const date = new Date(evaluation.date)
+    const color = evaluation.evaluation
     const today = new Date()
     const actions = [
       <FlatButton
@@ -89,18 +87,16 @@ class NewEvaluationButton extends PureComponent {
     ]
 
     return (
-      <div className="chip evaluation-chip">
-        <Chip
-        backgroundColor={colors(color)}
-        onClick={() => this.handleClick(color)}>
-          +
+      <div>
+        <Chip onClick={this.handleClick}>
+        <Avatar size={32} backgroundColor={colors(evaluation.evaluation)}/>
+          {date.toLocaleDateString()}
         </Chip>
         <Dialog
-          title="New evaluation"
+          title="Edit evaluation"
           actions={actions}
           modal={true}
-          open={this.state.open}
-        >
+          open={this.state.open} >
           <form>
             <RadioButtonGroup
               className="radio-buttons"
@@ -135,9 +131,8 @@ class NewEvaluationButton extends PureComponent {
                 onChange={this.handleChangeDate}
                 autoOk={true}
                 floatingLabelText="Evaluated Date"
-                defaultDate={this.state.date}
+                defaultDate={date}
                 shouldDisableDate={this.usedDate}
-                defaultDate={this.usedDate(today) ? undefined : today}
                 maxDate={today}
               />
             </div>
@@ -146,6 +141,7 @@ class NewEvaluationButton extends PureComponent {
                 ref="remarks"
                 type="text"
                 hintText="Remarks (optional)"
+                defaultValue={evaluation.remarks}
                 fullWidth={true}
                 multiLine={true}
                 rows={1}
@@ -154,9 +150,8 @@ class NewEvaluationButton extends PureComponent {
           </form>
         </Dialog>
       </div>
-
     )
   }
 }
 
-export default connect(null, { createEvaluation })(NewEvaluationButton)
+export default connect(null, { editEvaluation })(EditEvaluationChip)

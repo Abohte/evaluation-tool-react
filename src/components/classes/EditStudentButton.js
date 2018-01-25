@@ -48,7 +48,7 @@ class EditStudentButton extends PureComponent {
   }
 
   render() {
-    const { _id, firstName, lastName, photo } = this.props
+    const { firstName, lastName, photo } = this.props
 
     const actions = [
       <FlatButton
