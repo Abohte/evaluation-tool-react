@@ -70,7 +70,7 @@ class CreateClassButton extends PureComponent {
         onClick={this.handleClose}
       />,
       <FlatButton
-        label="Submit"
+        label="Save"
         primary={true}
         disabled={false}
         onClick={this.submitForm.bind(this)}

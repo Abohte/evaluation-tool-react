@@ -41,7 +41,7 @@ class DeleteStudentButton extends PureComponent {
         onClick={this.handleClose}
       />,
       <FlatButton
-        label="Submit"
+        label="Delete"
         primary={true}
         disabled={false}
         onClick={this.submitDelete.bind(this)}

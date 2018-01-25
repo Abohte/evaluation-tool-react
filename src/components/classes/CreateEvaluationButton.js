@@ -15,14 +15,21 @@ import '../../containers/classes/Classes.css'
 
 class CreateEvaluationButton extends PureComponent {
   static propTypes = {
+    startOpen: PropTypes.bool,
+    onNext: PropTypes.func.isRequired,
+    createEvaluation: PropTypes.func.isRequired,
+    student: PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      firstName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired,
+    }).isRequired,
     color: PropTypes.string,
-    studentId: PropTypes.string.isRequired
   }
 
   constructor(props) {
     super(props)
     this.state = {
-      open: false,
+      open: props.startOpen || false,
       date: undefined,
       evaluation: props.color || "green"
     }
@@ -51,15 +58,16 @@ class CreateEvaluationButton extends PureComponent {
     })
   }
 
-  submitForm(event) {
+  submitForm(next, event) {
     event.preventDefault()
     const evaluation = {
       remarks: this.refs.remarks.getValue(),
       date: this.state.date,
       evaluation: this.state.evaluation,
     }
-    this.props.createEvaluation(evaluation, this.props.studentId)
+    this.props.createEvaluation(evaluation, this.props.student._id)
     this.handleClose()
+    if (next) this.props.onNext()
   }
 
   usedDate = (date) => {
@@ -80,10 +88,16 @@ class CreateEvaluationButton extends PureComponent {
         onClick={this.handleClose}
       />,
       <FlatButton
-        label="Submit"
+        label="Save"
         primary={true}
         disabled={false}
-        onClick={this.submitForm.bind(this)}
+        onClick={this.submitForm.bind(this, false)}
+      />,
+      <FlatButton
+        label="Save and Next"
+        primary={true}
+        disabled={false}
+        onClick={this.submitForm.bind(this, true)}
       />,
     ]
 
@@ -95,7 +109,7 @@ class CreateEvaluationButton extends PureComponent {
           +
         </Chip>
         <Dialog
-          title="New evaluation"
+          title={`Evaluate ${this.props.student.firstName} ${this.props.student.lastName}`}
           actions={actions}
           modal={true}
           open={this.state.open} >
