@@ -80,10 +80,10 @@ class CreateClassButton extends PureComponent {
     return (
       <div>
         <div className="CreateClassButton">
-        <FloatingActionButton
-          onClick={this.handleClickOpen} >
-          <ContentAdd />
-        </FloatingActionButton>
+          <FloatingActionButton
+            onClick={this.handleClickOpen} >
+            <ContentAdd />
+          </FloatingActionButton>
         </div>
         <Dialog
           title="Create class"

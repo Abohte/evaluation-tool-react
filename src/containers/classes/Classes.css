@@ -27,3 +27,43 @@ footer {
   display: flex;
   flexWrap: wrap;
 }
+
+.edit-buttons {
+  justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
+}
+
+.question-button {
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.evaluation-bar {
+  height: 40px;
+  width: 100%;
+  background-color: grey;
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: row;
+}
+
+.evaluation {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.red {
+  background-color: red
+}
+.evaluation-yellow {
+  background-color: yellow
+}
+.evaluation-green {
+  background-color: green
+}
+.evaluation-missing {
+  background-color: grey
+}
