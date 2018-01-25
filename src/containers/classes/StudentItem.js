@@ -47,6 +47,7 @@ class ClassItem extends PureComponent {
 
   render() {
     const { _id, firstName, lastName, photo, evaluations } = this.props
+    const evaluationDates = evaluations.map((evaluation) => new Date(evaluation.date))
 
     return (
 
@@ -62,9 +63,9 @@ class ClassItem extends PureComponent {
 
         <CardText expandable={true}>
           <div className="evaluation-buttons">
-            <NewEvaluationButton color="red" />
-            <NewEvaluationButton color="yellow" />
-            <NewEvaluationButton color="green" />
+            <NewEvaluationButton evaluationDates={evaluationDates} color="red" />
+            <NewEvaluationButton evaluationDates={evaluationDates} color="yellow" />
+            <NewEvaluationButton evaluationDates={evaluationDates} color="green" />
           </div>
           <div className="wrapper">
             {evaluations.map(this.renderEvaluation)}

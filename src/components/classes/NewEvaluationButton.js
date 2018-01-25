@@ -51,8 +51,15 @@ class NewEvaluationButton extends PureComponent {
     this.handleClose()
   }
 
-  render() {
+  disableUsedDates = (date) => {
+    return this.props.evaluationDates.some((evalDate) => {
+      return ( date.getDate() === evalDate.getDate() &&
+      date.getMonth() === evalDate.getMonth() &&
+      date.getFullYear() === evalDate.getFullYear() )
+    })
+  }
 
+  render() {
     const color = this.props.color
     const actions = [
       <FlatButton
@@ -111,6 +118,7 @@ class NewEvaluationButton extends PureComponent {
                 autoOk={true}
                 floatingLabelText="Evaluated Date"
                 defaultDate={this.state.date}
+                shouldDisableDate={this.disableUsedDates}
               />
             </div>
             <div className="input">
