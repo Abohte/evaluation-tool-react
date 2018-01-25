@@ -20,7 +20,7 @@ class ClassItem extends PureComponent {
 
   renderStudent = (student, index) => {
     const studentName = `${student.firstName} ${student.lastName}`
-    const color = colors(student.evaluations.length > 0 ? student.evaluations[0].evaluation : null)
+    const color = colors(student.evaluations.length > 0 ? student.evaluations.reverse()[0].evaluation : null)
     return (
         <div key={index} className="chip">
           <Chip>

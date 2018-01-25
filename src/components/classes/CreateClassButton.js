@@ -6,14 +6,11 @@ import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 import Dialog from 'material-ui/Dialog'
 import DatePicker from 'material-ui/DatePicker'
-import createClass from '../../actions/classes/create'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
+import createClass from '../../actions/classes/create'
 
 class CreateClassButton extends PureComponent {
-  static propTypes = {
-    signedIn: PropTypes.bool,
-  }
 
   state = {
     open: false,
@@ -116,8 +113,4 @@ class CreateClassButton extends PureComponent {
   }
 }
 
-const mapDispatchToProps = {
-  createClass
-}
-
-export default connect(null, mapDispatchToProps)(CreateClassButton)
+export default connect(null, { createClass })(CreateClassButton)

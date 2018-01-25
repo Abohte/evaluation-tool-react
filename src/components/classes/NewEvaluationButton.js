@@ -11,16 +11,22 @@ import ActionSelected from 'material-ui/svg-icons/image/lens';
 import ActionUnselected from 'material-ui/svg-icons/image/panorama-fish-eye';
 import Chip from 'material-ui/Chip'
 import colors from '../../components/UI/Colors.js'
+import createEvaluation from '../../actions/evaluations/create'
 import '../../containers/classes/Classes.css'
 
 class NewEvaluationButton extends PureComponent {
   static propTypes = {
-    color: PropTypes.string.isRequired
+    color: PropTypes.string,
+    studentId: PropTypes.string.isRequired
   }
 
-  state = {
-    open: false,
-    date: undefined,
+  constructor(props) {
+    super(props)
+    this.state = {
+      open: false,
+      date: undefined,
+      evaluation: props.color || "green"
+    }
   }
 
   handleClick = (color) => {
@@ -40,18 +46,24 @@ class NewEvaluationButton extends PureComponent {
     })
   }
 
+  handleChangeValueSelected = (event, value) => {
+    this.setState({
+      evaluation: value,
+    })
+  }
+
   submitForm(event) {
     event.preventDefault()
-    // const aClass = {
-    //   batchNumber: this.refs.batchNumber.getValue(),
-    //   startsAt: this.state.startDate,
-    //   endsAt: this.state.endDate,
-    // }
-    // this.props.createClass(aClass)
+    const evaluation = {
+      remarks: this.refs.remarks.getValue(),
+      date: this.state.date,
+      evaluation: this.state.evaluation,
+    }
+    this.props.createEvaluation(evaluation, this.props.studentId)
     this.handleClose()
   }
 
-  disableUsedDates = (date) => {
+  usedDate = (date) => {
     return this.props.evaluationDates.some((evalDate) => {
       return ( date.getDate() === evalDate.getDate() &&
       date.getMonth() === evalDate.getMonth() &&
@@ -61,6 +73,7 @@ class NewEvaluationButton extends PureComponent {
 
   render() {
     const color = this.props.color
+    const today = new Date()
     const actions = [
       <FlatButton
         label="Cancel"
@@ -89,7 +102,12 @@ class NewEvaluationButton extends PureComponent {
           open={this.state.open}
         >
           <form>
-            <RadioButtonGroup className="radio-buttons" name="shipSpeed" defaultSelected={color} >
+            <RadioButtonGroup
+              className="radio-buttons"
+              ref="evaluation"
+              name="evaluation"
+              defaultSelected={color}
+              onChange={this.handleChangeValueSelected} >
               <RadioButton
                 className="radio-button"
                 value="red"
@@ -118,7 +136,9 @@ class NewEvaluationButton extends PureComponent {
                 autoOk={true}
                 floatingLabelText="Evaluated Date"
                 defaultDate={this.state.date}
-                shouldDisableDate={this.disableUsedDates}
+                shouldDisableDate={this.usedDate}
+                defaultDate={this.usedDate(today) ? undefined : today}
+                maxDate={today}
               />
             </div>
             <div className="input">
@@ -139,4 +159,4 @@ class NewEvaluationButton extends PureComponent {
   }
 }
 
-export default (NewEvaluationButton)
+export default connect(null, { createEvaluation })(NewEvaluationButton)

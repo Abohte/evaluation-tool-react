@@ -23,7 +23,7 @@ footer {
 
 .wrapper {
   display: flex;
-  flexWrap: wrap;
+  flex-wrap: wrap;
 }
 
 .evaluation-buttons {

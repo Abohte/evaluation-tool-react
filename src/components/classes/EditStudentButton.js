@@ -73,7 +73,7 @@ class EditStudentButton extends PureComponent {
         </FloatingActionButton>
         </div>
         <Dialog
-          title="Add student"
+          title="Edit student"
           actions={actions}
           modal={true}
           open={this.state.open}
