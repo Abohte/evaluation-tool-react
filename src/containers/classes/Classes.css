@@ -26,13 +26,22 @@ footer {
   flexWrap: wrap;
 }
 
+.evaluation-buttons {
+  justify-content: flex-start;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
 .edit-buttons {
   justify-content: flex-end;
   display: flex;
   flex-direction: row;
+  margin: 10px;
 }
 
 /* classpage */
+
 .question-button {
   width: 100%;
   margin-bottom: 25px;
@@ -54,19 +63,17 @@ footer {
   justify-content: center;
 }
 
-.red {
-  background-color: red
-}
-.evaluation-yellow {
-  background-color: yellow
-}
-.evaluation-green {
-  background-color: green
-}
-.evaluation-missing {
-  background-color: grey
+/* evaluations */
+
+.radio-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start
 }
 
-.selected-student {
-
+.radio-buttons > div {
+  width: auto;
+}
+.radio-button {
+  height: 50px
 }

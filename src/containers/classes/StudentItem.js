@@ -1,15 +1,12 @@
-// src/recipes/RecipeItem.js
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 import { Link } from 'react-router-dom'
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
 import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
 import EditStudentButton from '../../components/classes/EditStudentButton'
 import DeleteStudentButton from '../../components/classes/DeleteStudentButton'
+import NewEvaluationButton from '../../components/classes/NewEvaluationButton'
 import colors from '../../components/UI/Colors.js'
 import './Classes.css'
 
@@ -64,15 +61,20 @@ class ClassItem extends PureComponent {
         />
 
         <CardText expandable={true}>
+          <div className="evaluation-buttons">
+            <NewEvaluationButton color="red" />
+            <NewEvaluationButton color="yellow" />
+            <NewEvaluationButton color="green" />
+          </div>
           <div className="wrapper">
             {evaluations.map(this.renderEvaluation)}
           </div>
         </CardText>
         <CardActions>
-        <div className="edit-buttons">
-          <EditStudentButton { ...this.props }/>
-          <DeleteStudentButton studentId={_id}/>
-        </div>
+          <div className="edit-buttons">
+            <EditStudentButton { ...this.props }/>
+            <DeleteStudentButton studentId={_id}/>
+          </div>
         </CardActions>
       </Card>
     )
@@ -80,4 +82,4 @@ class ClassItem extends PureComponent {
   }
 }
 
-export default connect(null, { push })(ClassItem)
+export default (ClassItem)

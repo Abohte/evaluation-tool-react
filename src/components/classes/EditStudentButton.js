@@ -80,13 +80,13 @@ class EditStudentButton extends PureComponent {
         >
           <form>
             <div className="input">
-              <TextField ref="firstName" type="text" hintText="First Name" defaultValue={firstName} />
+              <TextField ref="firstName" type="text" hintText="First Name" defaultValue={firstName} fullWidth={true}/>
             </div>
             <div className="input">
-              <TextField ref="lastName" type="text" hintText="Last Name" defaultValue={lastName}/>
+              <TextField ref="lastName" type="text" hintText="Last Name" defaultValue={lastName} fullWidth={true} />
             </div>
             <div className="input">
-              <TextField ref="photo" type="url" hintText="Photo URL" defaultValue={photo} />
+              <TextField ref="photo" type="url" hintText="Photo URL" defaultValue={photo} fullWidth={true} />
             </div>
           </form>
         </Dialog>

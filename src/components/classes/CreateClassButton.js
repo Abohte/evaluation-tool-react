@@ -29,8 +29,8 @@ class CreateClassButton extends PureComponent {
   handleClose = () => {
     this.setState({
       open: false,
-      startDate: null,
-      endDate: null,
+      startDate: undefined,
+      endDate: undefined,
     })
   }
 
