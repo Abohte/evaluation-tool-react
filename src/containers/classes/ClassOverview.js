@@ -1,5 +1,5 @@
-// src/containers/Lobby.js
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
 import fetchClasses from '../../actions/classes/fetch'
@@ -8,7 +8,10 @@ import ClassItem from './ClassItem'
 import './Classes.css'
 
 class ClassOverview extends PureComponent {
-
+  static propTypes = {
+    classes: PropTypes.array.isRequired,
+    fetchClasses: PropTypes.func.isRequired,
+  }
 
   componentWillMount() {
     const { replace, signedIn, fetchClasses } = this.props
@@ -21,14 +24,17 @@ class ClassOverview extends PureComponent {
 
   render() {
     if (!this.props.signedIn) return null
+
+    const { classes } = this.props
+    const batchNumbers = classes.map((aClass) => aClass.batchNumber)
     return (
       <div className="Classes">
         <h1>All classes</h1>
         <main>
-          {this.props.classes.map(this.renderClassItem)}
+          {classes.map(this.renderClassItem)}
         </main>
         <footer>
-          <CreateClassButton />
+          <CreateClassButton batchNumbers={batchNumbers}/>
         </footer>
       </div>
     )

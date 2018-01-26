@@ -25,9 +25,6 @@ export default ({ email, password}) => {
 
         api.storeToken(jwt)
 
-        // Redirect programatically to the Lobby
-        dispatch(replace('/'))
-
         return api.get('/users/me')
       })
       .then((res) => {
@@ -35,6 +32,8 @@ export default ({ email, password}) => {
           type: USER_SIGNED_IN,
           payload: res.body
         })
+        // Redirect programatically to homepage
+        dispatch(replace('/'))
       })
       .catch((error) => {
         dispatch({ type: APP_DONE_LOADING })
