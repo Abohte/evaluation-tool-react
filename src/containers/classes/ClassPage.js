@@ -1,6 +1,7 @@
 // src/containers/classes/ViewClass.js
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import { replace } from 'react-router-redux'
 import Snackbar from 'material-ui/Snackbar'
 import { fetchOneClass } from '../../actions/classes/fetch'
 import StudentItem from './StudentItem'
@@ -19,7 +20,8 @@ class ClassPage extends PureComponent {
   }
 
   componentWillMount() {
-    this.props.fetchOneClass(this.props.match.params.classId)
+    const { replace, signedIn, fetchOneClass } = this.props
+    signedIn ? fetchOneClass(this.props.match.params.classId) : replace('/sign-in')
   }
 
   renderStudentItem = (student, index) => {
@@ -88,7 +90,7 @@ class ClassPage extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ classes }, { match }) => {
+const mapStateToProps = ({ classes, currentUser }, { match }) => {
   const aClass = classes.reduce((prev, next) => {
     if (next._id === match.params.classId) {
       return next
@@ -97,8 +99,9 @@ const mapStateToProps = ({ classes }, { match }) => {
   }, {})
 
   return {
-    ...aClass
+    ...aClass,
+    signedIn: !!currentUser && !!currentUser._id
   }
 }
 
-export default connect(mapStateToProps, { fetchOneClass })(ClassPage)
+export default connect(mapStateToProps, { fetchOneClass, replace })(ClassPage)
