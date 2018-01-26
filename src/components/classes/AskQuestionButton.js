@@ -56,7 +56,6 @@ class AskQuestionButton extends PureComponent {
   }
 
   render() {
-    console.log(this.props)
     const actions = [
       <FlatButton
         label="Back"

@@ -1,4 +1,3 @@
-// src/routes.js
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 
@@ -10,9 +9,6 @@ import {
 } from './containers'
 
 export default class Routes extends Component {
-
-  //TODO: Does it make sense to have classes on "/" or make "/" redirect to sign-in or classes?
-  //TODO: Update routes for creating / viewing a class
 
   render() {
     return (
