@@ -19,7 +19,7 @@ class AskQuestionButton extends PureComponent {
   handleClickOpen = () => {
     this.setState({
       open: true,
-      studentName: this.selectStudent()
+      studentName: this.selectStudent(Math.floor(Math.random() * 100))
     })
   }
 
@@ -29,9 +29,8 @@ class AskQuestionButton extends PureComponent {
     })
   }
 
-  selectStudent = () => {
+  selectStudent = (randomNumber) => {
     if (this.props.students.length === 0) return "No students in this class"
-    var randomNumber = Math.floor(Math.random() * 100)
     let students = []
     switch (true) {
       case (randomNumber < 47) :
@@ -45,7 +44,7 @@ class AskQuestionButton extends PureComponent {
     }
 
     // retry in case there are students, but a color is selected which has no students
-    return (students.length > 0 ? this.getRandomStudent(students) : this.selectStudent())
+    return (students.length > 0 ? this.getRandomStudent(students) : this.selectStudent(Math.floor(Math.random() * 100)))
   }
 
   studentsByEvaluationColor = (color) => {
@@ -57,6 +56,7 @@ class AskQuestionButton extends PureComponent {
   }
 
   render() {
+    console.log(this.props)
     const actions = [
       <FlatButton
         label="Back"
