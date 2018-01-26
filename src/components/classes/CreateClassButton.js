@@ -12,7 +12,8 @@ import createClass from '../../actions/classes/create'
 
 class CreateClassButton extends PureComponent {
   static propTypes = {
-    createClass: PropTypes.func.isRequired
+    createClass: PropTypes.func.isRequired,
+    batchNumbers: PropTypes.array.isRequired
   }
 
   state = {
@@ -28,6 +29,7 @@ class CreateClassButton extends PureComponent {
   handleClose = () => {
     this.setState({
       open: false,
+      batchNumber: undefined,
       startDate: undefined,
       endDate: undefined,
       batchNumberError: undefined,
@@ -37,9 +39,24 @@ class CreateClassButton extends PureComponent {
   }
 
   validateBatchNumber() {
-    const { batchNumber } = this.refs
+    const { batchNumber } = this.state
+    const { batchNumbers } = this.props
+    console.log(batchNumbers)
+    console.log(batchNumber)
+    const batchnrtaken = batchNumbers.some((batchNo) => {
+      debugger
+      Number(batchNo) === Number(batchNumber)
+    })
+    console.log(batchNumbers.some(batchNo => Number(batchNo) === Number(batchNumber)))
 
-    if (batchNumber.getValue()) {
+    if (batchNumbers.some(batchNo => batchNo == batchNumber)) {
+      this.setState({
+        batchNumberError: "This batchNumber already exists"
+      })
+      return false
+    }
+
+    if (batchNumber) {
       this.setState({
         batchNumberError: null
       })
@@ -110,11 +127,17 @@ class CreateClassButton extends PureComponent {
     })
   }
 
+  handleChangeBatchNumber = (event, batchNumber) => {
+    this.setState({
+      batchNumber: batchNumber,
+    })
+  }
+
   submitForm(event) {
     event.preventDefault()
     if (this.validateAll()) {
       const aClass = {
-        batchNumber: this.refs.batchNumber.getValue(),
+        batchNumber: this.state.batchNumber,
         startsAt: this.state.startDate,
         endsAt: this.state.endDate,
       }
@@ -156,7 +179,7 @@ class CreateClassButton extends PureComponent {
           <form>
             <div className="input">
               <TextField ref="batchNumber" type="number" hintText="Batch Number"
-              onChange={this.validateBatchNumber.bind(this)}
+              onChange={this.handleChangeBatchNumber}
               errorText={this.state.batchNumberError} />
             </div>
             <div className="input">

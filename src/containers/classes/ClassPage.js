@@ -1,5 +1,5 @@
-// src/containers/classes/ViewClass.js
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
 import Snackbar from 'material-ui/Snackbar'
@@ -11,8 +11,15 @@ import AskQuestionButton from '../../components/classes/AskQuestionButton'
 import './Classes.css'
 
 class ClassPage extends PureComponent {
+  static propTypes = {
+    // students: PropTypes.array.isRequired,
+    // _id: PropTypes.string.isRequired,
+    // batchNumber: PropTypes.number.isRequired,
+    fetchOneClass: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       open: false,
       toEvaluate: undefined
