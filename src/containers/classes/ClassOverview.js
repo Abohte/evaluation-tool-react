@@ -37,7 +37,7 @@ class ClassOverview extends PureComponent {
 
 const mapStateToProps = ({ classes, currentUser }) => {
   return {
-    ...classes,
+    classes,
     signedIn: !!currentUser && !!currentUser._id
   }
 }
