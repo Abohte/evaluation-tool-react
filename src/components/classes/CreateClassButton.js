@@ -41,15 +41,8 @@ class CreateClassButton extends PureComponent {
   validateBatchNumber() {
     const { batchNumber } = this.state
     const { batchNumbers } = this.props
-    console.log(batchNumbers)
-    console.log(batchNumber)
-    const batchnrtaken = batchNumbers.some((batchNo) => {
-      debugger
-      Number(batchNo) === Number(batchNumber)
-    })
-    console.log(batchNumbers.some(batchNo => Number(batchNo) === Number(batchNumber)))
 
-    if (batchNumbers.some(batchNo => batchNo == batchNumber)) {
+    if (batchNumbers.some(batchNo => batchNo === Number(batchNumber))) {
       this.setState({
         batchNumberError: "This batchNumber already exists"
       })
