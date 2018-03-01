@@ -4,6 +4,10 @@ React frontend made as a final assignment for evaluation during week 7 of the 9-
 
 This is an app that allows teachers to evaluate the performance of students, get an overview of the current state of evaluations per class and randomly select a student from that class to ask a question.
 
+* Database: MongoDB
+* Backend: Express
+* Frontend: React.js
+
 <p align="middle">
 <img src="src/images/ClassesOverview.png" width="425" />
 <img src="src/images/ClassWithStudents.png" width="425" />
@@ -26,10 +30,6 @@ Creating a student evaluation tool, based on the following user stories:
 - when I click on a photo or name, I can click on GREEN, YELLOW, or RED, fill in the date (defaults to today), and a remark. When I click “Save” it saves my evaluation, and takes me back to the student overview, when I click “Save and Next” it saves and shows me the next student.
 - when I look at a student’s page, I can only fill in one evaluation per student per day. I can edit my own evaluations.
 - from the class view I can click a button “ASK A QUESTION”. It shows me the name and picture of a random student to ask a question. Not entirely random though: RED students get ~47% of the questions YELLOW students ~32%, and GREEN students ~21%
-
-* Database: MongoDB
-* Backend: Express
-* Frontend: React.js
 
 ## Running Locally
 
