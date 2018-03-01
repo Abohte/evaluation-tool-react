@@ -142,6 +142,7 @@ class CreateEvaluationButton extends PureComponent {
               <RadioButton
                 className="radio-button"
                 value="red"
+                width="100px"
                 iconStyle={{height: "50px", width: "50px"}}
                 checkedIcon={<ActionSelected style={{fill: `${colors("red")}`}} />}
                 uncheckedIcon={<ActionUnselected style={{fill: `${colors("red")}`}} />}
@@ -149,6 +150,7 @@ class CreateEvaluationButton extends PureComponent {
               <RadioButton
                 className="radio-button"
                 value="yellow"
+                width="100px"
                 iconStyle={{height: "50px", width: "50px"}}
                 checkedIcon={<ActionSelected style={{fill: `${colors("yellow")}`}} />}
                 uncheckedIcon={<ActionUnselected style={{fill: `${colors("yellow")}`}} />}
@@ -156,6 +158,7 @@ class CreateEvaluationButton extends PureComponent {
               <RadioButton
                 className="radio-button"
                 value="green"
+                width="100px"
                 iconStyle={{height: "50px", width: "50px"}}
                 checkedIcon={<ActionSelected style={{fill: `${colors("green")}`}} />}
                 uncheckedIcon={<ActionUnselected style={{fill: `${colors("green")}`}} />}
