@@ -72,10 +72,11 @@ footer {
 }
 
 .radio-buttons > div {
-  width: auto;
+  width: 100px !important;
 }
 .radio-button {
-  height: 50px
+  height: 50px;
+  width: 100px;
 }
 
 .remarks {
