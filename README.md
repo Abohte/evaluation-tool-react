@@ -4,9 +4,9 @@ React frontend made as a final assignment for evaluation during week 7 of the 9-
 
 This is an app that allows teachers to evaluate the performance of students, get an overview of the current state of evaluations per class and randomly select a student from that class to ask a question.
 
-* Database: MongoDB
+* Frontend: React
 * Backend: Express
-* Frontend: React.js
+* Database: MongoDB
 
 <p align="middle">
 <img src="src/images/ClassesOverview.png" width="425" />
